@@ -16,7 +16,10 @@ namespace TestWPF
         public ObservableCollection<Employee> Employes { get; set; }
         public Employee SelectedEmployee
         {
-            get { return selectedEmployee; }
+            get
+            {
+                return selectedEmployee;
+            }
             set
             {
                 selectedEmployee = value;
@@ -24,22 +27,33 @@ namespace TestWPF
             }
         }
 
+        public void AddEmployee()
+        {
+            Employee emp = new Employee();
+            Employes.Insert(0, emp);
+            SelectedEmployee = emp;
+        }
+
+        public void RemoveEmployee()
+        {
+            if (selectedEmployee != null)
+            {
+                Employes.Remove(SelectedEmployee);
+            }
+        }
+
         public ApplicationViewModel()
         {
-            Employes = new ObservableCollection<Employee>
-            {
-                new Employee {Name="aaa", Position="123", BirthDate=new DateTime(2000,1,12) },
-                new Employee {Name="bbb", Position="456", BirthDate =new DateTime(2001,1,12) },
-                new Employee {Name="ccc", Position="789", BirthDate=new DateTime(2002,1,12) },
-                new Employee {Name="ddd", Position="012", BirthDate=new DateTime(2003,1,12) }
-            };
+            Employes = new ObservableCollection<Employee>();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName]string prop = "")
         {
             if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(prop));
+            {
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
+            }
         }
     }
 }

@@ -13,6 +13,10 @@
         <Style TargetType="TextBox">
             <Setter Property="FontSize" Value="14" />
         </Style>
+        <Style TargetType="Button">
+            <Setter Property="Width" Value="40" />
+            <Setter Property="Margin" Value="5" />
+        </Style>
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -21,7 +25,7 @@
         </Grid.ColumnDefinitions>
 
         <ListBox Grid.Column="0" ItemsSource="{Binding Employes}"
-                 SelectedItem="{Binding SelectedEmployee}">
+                 SelectedItem="{Binding SelectedEmployee}" Margin="0,0,0,10">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Margin="5">
@@ -32,6 +36,7 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
+        <StackPanel Grid.Row="1" Orientation="Horizontal"/>
 
         <StackPanel Grid.Column="1" DataContext="{Binding SelectedEmployee}">
             <TextBlock Text="Выбранный элемент"  />
@@ -41,6 +46,8 @@
             <TextBox Text="{Binding Position, UpdateSourceTrigger=PropertyChanged}" />
             <TextBlock Text="Возраст" />
             <TextBox Text="{Binding BirthDate, UpdateSourceTrigger=PropertyChanged}" />
+            <Button x:Name="Add" Content="+" Height="25" Margin="5,0,185,0" Width="Auto"/>
+            <Button x:Name="Remove" Content="-" Margin="95,5"/>
         </StackPanel>
     </Grid>
 </Window>

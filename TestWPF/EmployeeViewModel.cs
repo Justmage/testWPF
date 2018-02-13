@@ -8,45 +8,39 @@ using System.Text;
 
 namespace TestWPF
 {
-    public class Employee : INotifyPropertyChanged
+    public class EmployeeViewModel : INotifyPropertyChanged
     {
-        private string name;
-        private string position;
-        private DateTime birthDate;
+        private Employee employee;
+
+        public EmployeeViewModel(Employee emp)
+        {
+            employee = emp;
+        }
 
         public string Name
         {
-            get
-            {
-                return name;
-            }
+            get { return employee.Name; }
             set
             {
-                name = value;
+                employee.Name = value;
                 OnPropertyChanged("Name");
             }
         }
         public string Position
         {
-            get
-            {
-                return position;
-            }
+            get { return employee.Position; }
             set
             {
-                position = value;
+                employee.Position = value;
                 OnPropertyChanged("Position");
             }
         }
         public DateTime BirthDate
         {
-            get
-            {
-                return birthDate;
-            }
+            get { return employee.BirthDate; }
             set
             {
-                birthDate = value;
+                employee.BirthDate = value;
                 OnPropertyChanged("BirthDate");
             }
         }
@@ -55,9 +49,7 @@ namespace TestWPF
         public void OnPropertyChanged([CallerMemberName]string prop = "")
         {
             if (PropertyChanged != null)
-            {
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
-            }
+                PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
     }
 }
