@@ -13,7 +13,11 @@ namespace TestWPF.Converter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return ((DateTime)value).ToString("dd.MM.yyyy");
+            int now = DateTime.Now.Year;
+            DateTime tempDate = (DateTime)value;
+            int bdate = tempDate.Year;
+            value = now - bdate;
+            return value.ToString();
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

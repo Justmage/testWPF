@@ -40,7 +40,7 @@ namespace TestWPF
         }
         public DateTime BirthDate
         {
-            get
+        get
             {
                 return birthDate;
             }
@@ -54,10 +54,7 @@ namespace TestWPF
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName]string prop = "")
         {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
-            }
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }
     }
 }

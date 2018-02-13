@@ -26,13 +26,21 @@ namespace TestWPF
             DataContext = new ApplicationViewModel();
         }
 
-        private void Add_Click(object sender, RoutedEventArgs e)
+        private void editButton_Click(object sender, RoutedEventArgs e)
         {
-            ((ApplicationViewModel)DataContext).AddEmployee();
+            ((ApplicationViewModel)DataContext).EditEmployee();
         }
-        private void Delete_Click(object sender, RoutedEventArgs e)
+
+        private void removeButton_Click(object sender, RoutedEventArgs e)
         {
             ((ApplicationViewModel)DataContext).RemoveEmployee();
+        }
+
+        private void addButton_Click(object sender, RoutedEventArgs e)
+        {
+            AdditingWindow aw = new AdditingWindow();
+            aw.Show();
+            Close();
         }
     }
 }
