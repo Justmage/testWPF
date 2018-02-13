@@ -23,6 +23,7 @@ namespace TestWPF
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = new ApplicationViewModel();
         }
     }
 }
