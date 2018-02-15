@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Windows;
 
 namespace TestWPF
 {
@@ -29,9 +30,24 @@ namespace TestWPF
 
         public void AddEmployee()
         {
-            Employee emp = new Employee();
-            Employes.Insert(Employes.Count, emp);
-            SelectedEmployee = emp;
+            AdditingWindow aw = new AdditingWindow();
+            if (aw.ShowDialog() == true)
+            {
+
+                Employee emp = new Employee
+                {
+                    Name = aw.nameTextBox.Text,
+                    Position = aw.positionTextBox.Text,
+                    BirthDate = DateTime.Parse(aw.birthdayTextBox.Text)
+                };
+                Employes.Insert(Employes.Count, emp);
+                SelectedEmployee = emp;
+                MessageBox.Show("Новый сотрудник добавлен", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else
+            {
+                MessageBox.Show("Добавление отменено");
+            }
         }
 
         public void RemoveEmployee()
@@ -54,21 +70,9 @@ namespace TestWPF
             }
         }
 
-        public void SetAge()
-        {
-            DateTime dateBirthDay = SelectedEmployee.BirthDate;
-            DateTime dateNow = DateTime.Now;
-            int year = dateNow.Year - dateBirthDay.Year;
-            if (dateNow.Month < dateBirthDay.Month ||
-                (dateNow.Month == dateBirthDay.Month && dateNow.Day < dateBirthDay.Day)) year--;
-        }
-
         public ApplicationViewModel()
         {
-            Employes = new ObservableCollection<Employee>
-            {
-                new Employee{Name="asdasd", Position="asdasd", BirthDate = new DateTime(2000,1,14) }
-            };
+            Employes = new ObservableCollection<Employee>();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

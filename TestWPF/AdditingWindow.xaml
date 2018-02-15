@@ -3,21 +3,21 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:TestWPF"
-        xmlns:sys="clr-namespace:System;assembly=mscorlib"
-        xmlns:local1="clr-namespace:TestWPF.Converter"
+        xmlns:Converter="clr-namespace:TestWPF.Converter"
         mc:Ignorable="d"
-        Title="Добавить сотрудника" Height="300" Width="300">
+        Title="Добавить сотрудника" Height="300" Width="300" WindowStartupLocation="CenterScreen">
     <Window.Resources>
-        <local1:DateTimeConverter x:Key="DateTimeConverter"/>
+        <Converter:ConvertFromDateTime x:Key="ConvertFromDateTime"/>
     </Window.Resources>
-    <Grid DataContext="{Binding SelectedEmployee}">
+    <Grid DataContext="">
         <Label Content="Имя" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0"/>
         <Label Content="Должность" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,69,0,0"/>
-        <Label Content="Возраст" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,128,0,0"/>
-        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="10,41,0,0"/>
-        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="10,100,0,0"/>
-        <TextBox Text="{Binding BirthDate, Converter={StaticResource DateTimeConverter}}" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="10,159,0,0"/>
-        <Button x:Name="acceptButton" Content="Применить" HorizontalAlignment="Left" Margin="182,238,0,0" VerticalAlignment="Top" Width="100" Click="acceptButton_Click"/>
+        <Label Content="Дата рождения" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,128,0,0"/>
+        <Label Content="Дату вводить в формате: 'гггг.мм.дд'" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,187,0,0"/>
+        <TextBox x:Name="nameTextBox" DataContext="{Binding SelectedEmployee}" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="10,41,0,0"/>
+        <TextBox x:Name="positionTextBox" DataContext="{Binding SelectedEmployee}" Text="{Binding Position, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="10,100,0,0"/>
+        <TextBox x:Name="birthdayTextBox" DataContext="{Binding SelectedEmployee}" Text="{Binding BirthDate, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, Converter={StaticResource ConvertFromDateTime}}" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="10,159,0,0"/>
+        <Button x:Name="acceptButton" IsDefault="True" Content="Применить" HorizontalAlignment="Left" Margin="10,228,0,0" Width="100" Click="acceptButton_Click" Height="22" VerticalAlignment="Top"/>
+        <Button IsCancel="True" Content="Отмена" HorizontalAlignment="Left" Margin="172,228,0,0" Width="100" Height="22" VerticalAlignment="Top"/>
     </Grid>
 </Window>

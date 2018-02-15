@@ -71,7 +71,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ApplicationViewModel.cs" />
-    <Compile Include="DateTimeConverter.cs" />
+    <Compile Include="ConvertFromDateTime.cs" />
     <Compile Include="Employee.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

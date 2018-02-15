@@ -6,29 +6,40 @@
         xmlns:local="clr-namespace:TestWPF"
         xmlns:Converter="clr-namespace:TestWPF.Converter"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
-        xmlns:local1="clr-namespace:System.ComponentModel;assembly=System" x:Class="TestWPF.MainWindow"
+        x:Class="TestWPF.MainWindow"
         mc:Ignorable="d"
-        Title="Сотрудники" Height="350" Width="525">
+        Title="Сотрудники" Height="350" Width="525" WindowStartupLocation="CenterScreen">
     <Window.Resources>
-        <Converter:DateTimeConverter x:Key="DateTimeConverter"/>
+        <Converter:ConvertFromDateTime x:Key="ConvertFromDateTime"/>
     </Window.Resources>
     <Grid>
-        <DataGrid ItemsSource="{Binding Employes}" SelectedItem="{Binding SelectedEmployee}" HorizontalAlignment="Left" Height="320" VerticalAlignment="Top" Width="290" AutoGenerateColumns="False" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False">
+        <DataGrid ItemsSource="{Binding Employes}" SelectedItem="{Binding SelectedEmployee}" HorizontalAlignment="Left" Height="320" VerticalAlignment="Top" Width="290" AutoGenerateColumns="False" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Header="Имя" Width="50*"/>
                 <DataGridTextColumn Binding="{Binding Position, UpdateSourceTrigger=PropertyChanged}" Header="Должность" Width="50*"/>
-                <DataGridTextColumn Binding="{Binding BirthDate, Converter={StaticResource DateTimeConverter}}" Header="Возраст" Width="50*"/>
+                <DataGridTextColumn Binding="{Binding BirthDate, Converter={StaticResource ConvertFromDateTime}}" Header="Возраст" Width="50*"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Label Content="Имя" HorizontalAlignment="Left" Margin="295,0,0,0" VerticalAlignment="Top"/>
-        <Label Content="Должность" HorizontalAlignment="Left" Margin="295,59,0,0" VerticalAlignment="Top"/>
-        <Label Content="Возраст" HorizontalAlignment="Left" Margin="295,118,0,0" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="295,31,0,0" TextWrapping="Wrap" DataContext="{Binding SelectedEmployee}" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="295,90,0,0" TextWrapping="Wrap" DataContext="{Binding SelectedEmployee}" Text="{Binding Position, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="295,149,0,0" TextWrapping="Wrap" DataContext="{Binding SelectedEmployee}" Text="{Binding BirthDate, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="212"/>
-        <Button x:Name="editButton" Content="Редактировать" HorizontalAlignment="Left" Margin="295,177,0,0" VerticalAlignment="Top" Width="100" Click="editButton_Click"/>
-        <Button x:Name="removeButton" Content="Удалить" HorizontalAlignment="Left" Margin="295,204,0,0" VerticalAlignment="Top" Width="100" Click="removeButton_Click"/>
-        <Button x:Name="addButton" Content="Добавить" HorizontalAlignment="Left" Margin="407,288,0,0" VerticalAlignment="Top" Width="100" Click="addButton_Click"/>
+        <!--
+        
+        
+        
+        
+        
+        -->
+        <Button x:Name="addButton" Content="Добавить" HorizontalAlignment="Left" Margin="407,288,0,0" Width="100" Click="addButton_Click" Height="22" VerticalAlignment="Top"/>
+        <GroupBox Header="Редактировать данные" HorizontalAlignment="Left" Height="240" Margin="295,10,0,0" VerticalAlignment="Top" Width="212">
+            <StackPanel Margin="0">
+                <Label Content="Имя" HorizontalAlignment="Left"/>
+                <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" DataContext="{Binding SelectedEmployee}" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Width="120"/>
+                <Label Content="Должность" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" DataContext="{Binding SelectedEmployee}" Text="{Binding Position, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
+                <Label Content="Дата рождения" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" DataContext="{Binding SelectedEmployee}" Text="{Binding BirthDate, StringFormat={}{0:d}, UpdateSourceTrigger=PropertyChanged}"  VerticalAlignment="Top" Width="188"/>
+                <Button x:Name="editButton" Content="Сохранить" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Click="editButton_Click"/>
+                <Button x:Name="removeButton" Content="Удалить" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Click="removeButton_Click"/>
+            </StackPanel>
+        </GroupBox>
 
     </Grid>
 </Window>

@@ -27,10 +27,7 @@ namespace TestWPF
 
         private void acceptButton_Click(object sender, RoutedEventArgs e)
         {
-            ((ApplicationViewModel)DataContext).AddEmployee();
-            MainWindow mw = new MainWindow();
-            mw.Show();
-            Close();
+            this.DialogResult = true;
         }
     }
 }
