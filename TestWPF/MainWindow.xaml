@@ -3,37 +3,28 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:TestWPF"
         xmlns:Converter="clr-namespace:TestWPF.Converter"
-        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         x:Class="TestWPF.MainWindow"
         mc:Ignorable="d"
-        Title="Сотрудники" Height="350" Width="525" WindowStartupLocation="CenterScreen">
+        Title="Сотрудники" Height="480" Width="640" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <Converter:ConvertFromDateTime x:Key="ConvertFromDateTime"/>
     </Window.Resources>
     <Grid>
-        <DataGrid ItemsSource="{Binding Employes}" SelectedItem="{Binding SelectedEmployee}" HorizontalAlignment="Left" Height="320" VerticalAlignment="Top" Width="290" AutoGenerateColumns="False" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" IsReadOnly="True">
+        <DataGrid ItemsSource="{Binding Employes}" SelectedItem="{Binding SelectedEmployee}" AutoGenerateColumns="False" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" IsReadOnly="True" Margin="0,0,227,0">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Header="Имя" Width="50*"/>
                 <DataGridTextColumn Binding="{Binding Position, UpdateSourceTrigger=PropertyChanged}" Header="Должность" Width="50*"/>
                 <DataGridTextColumn Binding="{Binding BirthDate, Converter={StaticResource ConvertFromDateTime}}" Header="Возраст" Width="50*"/>
             </DataGrid.Columns>
         </DataGrid>
-        <!--
-        
-        
-        
-        
-        
-        -->
-        <Button x:Name="addButton" Content="Добавить" HorizontalAlignment="Left" Margin="407,288,0,0" Width="100" Click="addButton_Click" Height="22" VerticalAlignment="Top"/>
-        <GroupBox Header="Редактировать данные" HorizontalAlignment="Left" Height="240" Margin="295,10,0,0" VerticalAlignment="Top" Width="212">
+        <Button x:Name="addButton" Content="Добавить" Margin="0,0,10,20" Click="addButton_Click" HorizontalAlignment="Right" Width="100" Height="22" VerticalAlignment="Bottom"/>
+        <GroupBox Header="Редактировать данные" Margin="0,10,10,0" HorizontalAlignment="Right" Width="212" Height="220" VerticalAlignment="Top">
             <StackPanel Margin="0">
                 <Label Content="Имя" HorizontalAlignment="Left"/>
-                <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" DataContext="{Binding SelectedEmployee}" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Width="120"/>
+                <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" DataContext="{Binding SelectedEmployee}" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Width="188"/>
                 <Label Content="Должность" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" DataContext="{Binding SelectedEmployee}" Text="{Binding Position, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
+                <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" DataContext="{Binding SelectedEmployee}" Text="{Binding Position, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="188"/>
                 <Label Content="Дата рождения" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                 <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" DataContext="{Binding SelectedEmployee}" Text="{Binding BirthDate, StringFormat={}{0:d}, UpdateSourceTrigger=PropertyChanged}"  VerticalAlignment="Top" Width="188"/>
                 <Button x:Name="editButton" Content="Сохранить" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Click="editButton_Click"/>
