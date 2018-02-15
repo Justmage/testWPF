@@ -25,20 +25,5 @@ namespace TestWPF
             InitializeComponent();
             DataContext = new ApplicationViewModel();
         }
-
-        private void editButton_Click(object sender, RoutedEventArgs e)
-        {
-            ((ApplicationViewModel)DataContext).EditEmployee();
-        }
-
-        private void removeButton_Click(object sender, RoutedEventArgs e)
-        {
-            ((ApplicationViewModel)DataContext).RemoveEmployee();
-        }
-
-        private void addButton_Click(object sender, RoutedEventArgs e)
-        {
-            ((ApplicationViewModel)DataContext).AddEmployee();
-        }
     }
 }

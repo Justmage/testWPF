@@ -14,9 +14,9 @@
         <Label Content="Должность" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,69,0,0"/>
         <Label Content="Дата рождения" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,128,0,0"/>
         <Label Content="Дату вводить в формате: 'гггг.мм.дд'" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,187,0,0"/>
-        <TextBox x:Name="nameTextBox" DataContext="{Binding SelectedEmployee}" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="170" Margin="10,41,0,0"/>
-        <TextBox x:Name="positionTextBox" DataContext="{Binding SelectedEmployee}" Text="{Binding Position, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="170" Margin="10,100,0,0"/>
-        <TextBox x:Name="birthdayTextBox" DataContext="{Binding SelectedEmployee}" Text="{Binding BirthDate, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, Converter={StaticResource ConvertFromDateTime}}" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="10,159,0,0"/>
+        <TextBox x:Name="nameTextBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="170" Margin="10,41,0,0"/>
+        <TextBox x:Name="positionTextBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="170" Margin="10,100,0,0"/>
+        <TextBox x:Name="birthdayTextBox" Text="{Binding BirthDate, Converter={StaticResource ConvertFromDateTime}}" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="10,159,0,0"/>
         <Button x:Name="acceptButton" IsDefault="True" Content="Применить" HorizontalAlignment="Left" Margin="10,228,0,0" Width="100" Click="acceptButton_Click" Height="22" VerticalAlignment="Top"/>
         <Button IsCancel="True" Content="Отмена" HorizontalAlignment="Left" Margin="172,228,0,0" Width="100" Height="22" VerticalAlignment="Top"/>
     </Grid>

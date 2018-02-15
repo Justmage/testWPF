@@ -24,45 +24,71 @@ namespace TestWPF
             }
         }
 
-        public void AddEmployee()
+        private RelayCommand editCommand;
+        public RelayCommand EditCommand
         {
-            AdditingWindow aw = new AdditingWindow();
-            if (aw.ShowDialog() == true)
+            get
             {
-
-                Employee emp = new Employee
-                {
-                    Name = aw.nameTextBox.Text,
-                    Position = aw.positionTextBox.Text,
-                    BirthDate = DateTime.Parse(aw.birthdayTextBox.Text)
-                };
-                Employes.Insert(Employes.Count, emp);
-                SelectedEmployee = emp;
-                MessageBox.Show("Новый сотрудник добавлен", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
-            else
-            {
-                MessageBox.Show("Добавление отменено");
-            }
-        }
-
-        public void RemoveEmployee()
-        {
-            if (selectedEmployee != null)
-            {
-                Employes.Remove(SelectedEmployee);
+                return editCommand ??
+                    (editCommand = new RelayCommand(obj =>
+                    {
+                        Employee emp = obj as Employee;
+                        if (emp != null)
+                        {
+                            emp = SelectedEmployee;
+                            Employes.Remove(SelectedEmployee);
+                            Employes.Insert(Employes.Count, emp);
+                            SelectedEmployee = emp;
+                        }
+                    },
+                    (obj) => Employes.Count > 0));
             }
         }
 
-        public void EditEmployee()
+        private RelayCommand removeCommand;
+        public RelayCommand RemoveCommand
         {
-            if (selectedEmployee != null)
+            get
             {
-                Employee emp = new Employee();
-                emp = SelectedEmployee;
-                Employes.Remove(SelectedEmployee);
-                Employes.Insert(Employes.Count, emp);
-                SelectedEmployee = emp;
+                return removeCommand ??
+                    (removeCommand = new RelayCommand(obj =>
+                    {
+                        Employee employee = obj as Employee;
+                        if (employee != null)
+                        {
+                            Employes.Remove(employee);
+                        }
+                    },
+                    (obj) => Employes.Count > 0));
+            }
+        }
+
+        private RelayCommand addCommand;
+        public RelayCommand AddCommand
+        {
+            get
+            {
+                return addCommand ??
+                  (addCommand = new RelayCommand(obj =>
+                  {
+                      AdditingWindow aw = new AdditingWindow();
+                      if (aw.ShowDialog() == true)
+                      {
+                          Employee emp = new Employee
+                          {
+                              Name = aw.nameTextBox.Text,
+                              Position = aw.positionTextBox.Text,
+                              BirthDate = DateTime.Parse(aw.birthdayTextBox.Text)
+                          };
+                          Employes.Insert(Employes.Count, emp);
+                          SelectedEmployee = emp;
+                          MessageBox.Show("Новый сотрудник добавлен", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
+                      }
+                      else
+                      {
+                          MessageBox.Show("Добавление отменено");
+                      }
+                  }));
             }
         }
 
