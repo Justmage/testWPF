@@ -15,7 +15,7 @@ using System.Windows.Shapes;
 namespace TestWPF
 {
     /// <summary>
-    /// Логика взаимодействия для AdditingWindow.xaml
+    /// ApplicationViewModel или "модель представления" связывает "модель" Employee и "представление" AdditingWindow через механизм привязки данных DataContext.
     /// </summary>
     public partial class AdditingWindow : Window
     {

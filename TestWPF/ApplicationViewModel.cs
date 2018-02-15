@@ -6,11 +6,29 @@ using System.Windows;
 
 namespace TestWPF
 {
+    /// <summary>
+    ///  Добавление в проект новый класс ApplicationViewModel , который выступает в роли "модель-представление".
+    ///  Это класс модели представления, через который будут связаны модель Employee и представление MainWindow.xaml. 
+    ///  Для уведомления системы об изменениях свойств модели и представления ApplicationViewModel реализует интерфейс INotifyPropertyChanged.
+    /// </summary>
     public class ApplicationViewModel : INotifyPropertyChanged
     {
-        private Employee selectedEmployee;
-
+        /// <summary>
+        ///  Список объектов Employee обёрнут динамической коллекцией.
+        /// </summary>
         public ObservableCollection<Employee> Employes { get; set; }
+        /// <summary>
+        /// Конструктор. Инициализация динамической коллекции сотрудниками(если таковые существуют).
+        /// </summary>
+        public ApplicationViewModel()
+        {
+            Employes = new ObservableCollection<Employee>();
+        }
+
+        /// <summary>
+        ///  Свойство, которое указывает на выделенный элемент в DataGrid.
+        /// </summary>
+        private Employee selectedEmployee;
         public Employee SelectedEmployee
         {
             get
@@ -24,6 +42,9 @@ namespace TestWPF
             }
         }
 
+        /// <summary>
+        ///  Комманда на редактирование сотрудника
+        /// </summary>
         private RelayCommand editCommand;
         public RelayCommand EditCommand
         {
@@ -45,6 +66,9 @@ namespace TestWPF
             }
         }
 
+        /// <summary>
+        ///  Комманда на удаление сотрудника
+        /// </summary>
         private RelayCommand removeCommand;
         public RelayCommand RemoveCommand
         {
@@ -63,6 +87,9 @@ namespace TestWPF
             }
         }
 
+        /// <summary>
+        ///  Комманда на создание нового сотрудника
+        /// </summary>
         private RelayCommand addCommand;
         public RelayCommand AddCommand
         {
@@ -92,11 +119,9 @@ namespace TestWPF
             }
         }
 
-        public ApplicationViewModel()
-        {
-            Employes = new ObservableCollection<Employee>();
-        }
-
+        /// <summary>
+        /// Реализация интерфейса INotifyPropertyChanged. Событие PropertyChangedEventHandler возникающее при изменении свойства компонента.
+        /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName]string prop = "")
         {

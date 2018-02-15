@@ -16,7 +16,7 @@ using System.Windows.Shapes;
 namespace TestWPF
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// ApplicationViewModel или "модель представления" связывает "модель" Employee и "представление" MainWindow через механизм привязки данных DataContext.
     /// </summary>
     public partial class MainWindow : Window
     {
